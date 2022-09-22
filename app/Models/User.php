@@ -60,4 +60,9 @@ class User extends Authenticatable implements JWTSubject
             'email' => $this->email,
         ];
     }
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }
