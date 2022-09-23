@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::get('/profile', [AuthController::class, 'getActiveUser'])->middleware('auth');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::post('/refresh-token', [AuthController::class, 'refreshToken']);

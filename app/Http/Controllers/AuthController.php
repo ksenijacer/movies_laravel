@@ -21,24 +21,35 @@ class AuthController extends Controller
             'token' => $token,
             'user' => Auth::user(),
         ],200);
-
-        
     }
     
 
-    public function login() {
+    public function login(Request $request) {
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
+        $token = Auth::login($user);
 
+        return response()->json([
+            'token' => $token,
+            'user' => Auth::user(),
+        ],200);
     }
 
-    public function getMyProfile() {
-    
+    public function getActiveUser() {
+        $activeUser = Auth::user();
+        return response()->json($activeUser);
     }
 
     public function logout() {
-
+        Auth::logout();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function refreshToken() {
-
+        $token = Auth::refresh();
+        return response()->json([
+            'token' => $token
+        ]);
     }
 }
