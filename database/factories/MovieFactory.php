@@ -18,7 +18,7 @@ class MovieFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'description' => $this->faker->word(),
-            'image_url' => $this->faker->imageUrl(),
+            'image_url' => $this->faker->image(),
             'genre' => $this->faker->word(),
             'user_id' => User::inRandomOrder()->first(),
         ];
