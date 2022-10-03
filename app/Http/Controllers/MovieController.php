@@ -12,7 +12,7 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::with('genres')->latest()->get();
 
         return response()->json($movies);
     }

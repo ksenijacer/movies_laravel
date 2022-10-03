@@ -25,13 +25,14 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'require|email|unique',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string',
             'password_confirmation' => 'required|same:password',
         ];
     }
 
-    public function passwordConfirmation() {
+    public function passwordConfirmation()
+    {
         return ['password_confirmation|same' => 'Your passwords do not match.'];
     }
 }
