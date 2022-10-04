@@ -21,7 +21,6 @@ class MovieFactory extends Factory
             'title' => $this->faker->word(),
             'description' => $this->faker->word(),
             'image_url' => $this->faker->imageUrl(),
-            'genres_id' => Genres::inRandomOrder()->first(),
             'user_id' => User::inRandomOrder()->first(),
         ];
     }

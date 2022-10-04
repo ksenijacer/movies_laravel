@@ -28,9 +28,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
 
 Route::get('/movies', [MovieController::class, 'index']);
-Route::get('/movies/{id}', [MovieController::class, 'show']);
+Route::get('/movies/{movie}', [MovieController::class, 'show']);
 Route::post('/movies', [MovieController::class, 'store']);
-Route::put('/movies/{id}', [MovieController::class, 'update']);
-Route::delete('/movies/{id}', [MovieController::class, 'destroy']);
+Route::put('/movies/{movie}', [MovieController::class, 'update']);
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
 
 Route::get('', [GenresController::class, 'index']);

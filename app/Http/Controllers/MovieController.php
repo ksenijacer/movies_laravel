@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Models\Genres;
+use Illuminate\Support\Facades\Auth;
 
 
 class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::with('genres')->latest()->get();
+        $movies = Movie::all()->load('genres');
+
+        // $movies = Movie::all();
+        // $movies->genres()->attach('genres_id');
 
         return response()->json($movies);
     }
@@ -29,6 +34,7 @@ class MovieController extends Controller
 
     public function show(Movie $movie)
     {
+        $movie->load('genres');
         return response()->json($movie);
     }
 

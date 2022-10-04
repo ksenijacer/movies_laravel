@@ -14,7 +14,6 @@ class Movie extends Model
         'title',
         'description',
         'image_url',
-        'genres_id',
 
     ];
 
@@ -25,6 +24,6 @@ class Movie extends Model
 
     public function genres()
     {
-        return $this->belongsTo(Genres::class);
+        return $this->belongsToMany(Genres::class, 'movie_genre', 'genres_id', 'movies_id');
     }
 }
