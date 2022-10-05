@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GenresController;
 use App\Http\Controllers\MovieController;
 
 /*
@@ -31,3 +32,5 @@ Route::get('/movies/{movie}', [MovieController::class, 'show']);
 Route::post('/movies', [MovieController::class, 'store']);
 Route::put('/movies/{movie}', [MovieController::class, 'update']);
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+
+Route::get('', [GenresController::class, 'index']);

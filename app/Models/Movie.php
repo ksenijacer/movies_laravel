@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Genres;
 
 class Movie extends Model
 {
@@ -13,11 +14,16 @@ class Movie extends Model
         'title',
         'description',
         'image_url',
-        'genre',
+
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genres::class, 'movie_genre', 'genres_id', 'movies_id');
     }
 }
