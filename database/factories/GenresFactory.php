@@ -16,8 +16,6 @@ class GenresFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

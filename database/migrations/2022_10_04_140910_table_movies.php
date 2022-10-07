@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('image_url')->nullable();
-            $table->foreignId('user_id')->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('movies', function (Blueprint $table) {
+            $table->string('image_url')->nullable()->change();
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->string('image_url')->nullable(false)->change();
+        });
     }
 };

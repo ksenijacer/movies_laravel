@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movie_genre', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->bigInteger('movies_id')->unsigned();
-            $table->foreign('movies_id')->references('id')->on('movies')->onDelete('cascade');
+        Schema::create('genres_movie', function (Blueprint $table) {
+            $table->bigInteger('movie_id')->unsigned();
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
 
             $table->bigInteger('genres_id')->unsigned();
             $table->foreign('genres_id')->references('id')->on('genres')->onDelete('cascade');
 
-            $table->primary(['movies_id', 'genres_id']);
+            $table->primary(['movie_id', 'genres_id']);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movie_genre');
+        Schema::dropIfExists('genres_movie');
     }
 };

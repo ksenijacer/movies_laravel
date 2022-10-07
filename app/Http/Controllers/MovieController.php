@@ -8,26 +8,38 @@ use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Genres;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\UnauthorizedException;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all()->load('genres');
-
-        // $movies = Movie::all();
-        // $movies->genres()->attach('genres_id');
+        $per_page = $request->query('per_page', 10);
+        $movies = Movie::with('genres', 'user')->paginate($per_page);
 
         return response()->json($movies);
     }
 
     public function store(StoreMovieRequest $request)
     {
-
+        if (!Auth::user()) {
+            throw new UnauthorizedException('User not logged in.');
+        }
         $data = $request->validated();
 
-        $movie = Movie::create($data);
+        $movie = Movie::create([
+            'user_id' => Auth::user()->id,
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image_url' => $data['image_url']
+        ]);
+
+        $genresArr = $data['genres'];
+
+        $genres = Genres::whereIn('type', $genresArr)->get();
+
+
+        $movie->genres()->attach($genres);
 
         return response()->json($movie);
     }

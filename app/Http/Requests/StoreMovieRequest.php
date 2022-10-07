@@ -26,9 +26,9 @@ class StoreMovieRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required|string',
-            'image_url' => 'array',
+            'image_url' => 'string',
             'image_url.*' => 'required|url|ends_with:jpeg,png,jpg',
-            'genre' => 'required|string'
+            'genres' => 'required|array|min:1'
         ];
     }
 }
