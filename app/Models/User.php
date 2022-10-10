@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use App\Models\Movie;
+use App\Models\Comment;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -64,5 +66,10 @@ class User extends Authenticatable implements JWTSubject
     public function movies()
     {
         return $this->hasMany(Movie::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

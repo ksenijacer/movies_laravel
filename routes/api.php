@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\MovieController;
 
@@ -29,8 +30,11 @@ Route::post('/refresh-token', [AuthController::class, 'refreshToken']);
 
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/{movie}', [MovieController::class, 'show']);
-Route::post('/movies', [MovieController::class, 'store']);
-Route::put('/movies/{movie}', [MovieController::class, 'update']);
-Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+Route::post('/movies', [MovieController::class, 'store'])->middleware('auth');
+Route::put('/movies/{movie}', [MovieController::class, 'update'])->middleware('auth');
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->middleware('auth');
 
 Route::get('/genres', [GenresController::class, 'index']);
+
+Route::get('/movies/{movie}/comments', [CommentController::class, 'show']);
+Route::post('/movies/{movie}/comments', [CommentController::class, 'store']);

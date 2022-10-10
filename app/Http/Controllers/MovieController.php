@@ -15,7 +15,10 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $per_page = $request->query('per_page', 10);
-        $movies = Movie::with('genres', 'user')->paginate($per_page);
+        $genres = $request->query('genres');
+        $title = $request->query('title');
+
+        $movies = Movie::with('genres', 'user')->searchByTitle($title)->paginate($per_page);
 
         return response()->json($movies);
     }
@@ -47,6 +50,7 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         $movie->load('genres');
+
         return response()->json($movie);
     }
 
