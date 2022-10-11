@@ -29,7 +29,7 @@ class AuthController extends Controller
         if (!$token = Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Invalid username or password'
-            ], Response::HTTP_UNAUTHORIZED);
+            ]);
         }
 
         return [
@@ -47,7 +47,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response(null);
     }
 
     public function refreshToken()

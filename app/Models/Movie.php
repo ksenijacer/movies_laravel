@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Genres;
+use App\Models\Comment;
+use App\Models\User;
 
 class Movie extends Model
 {
@@ -25,5 +27,18 @@ class Movie extends Model
     public function genres()
     {
         return $this->belongsToMany(Genres::class);
+    }
+
+    public function scopeSearchByTitle($query, $title = '')
+    {
+        if ($title) {
+            $query->where('title', 'like', "%$title%");
+        }
+        return $query;
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

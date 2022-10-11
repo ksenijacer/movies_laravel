@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         $this->call([
             GenresSeeder::class,
+            CommentSeeder::class,
         ]);
         Movie::factory(10)->create();
     }
