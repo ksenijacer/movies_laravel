@@ -24,11 +24,7 @@ class UpdateMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'sometimes|string',
-            'description' => 'sometimes|string',
-            'image_url' => 'array|min: 1',
-            'image_url.*' => ['sometimes', 'regex:/^(https?:)?\/\/?[^\'"<>]+?\.(jpg|jpeg|png)(.*)?$/'],
-            'genre' => 'sometimes|string',
+            'like' => 'boolean|nullable',
         ];
     }
 }

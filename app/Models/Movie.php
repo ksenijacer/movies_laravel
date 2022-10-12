@@ -32,7 +32,7 @@ class Movie extends Model
     public function scopeSearchByTitle($query, $title = '')
     {
         if ($title) {
-            $query->where('title', 'like', "%$title%");
+            return $query->where('title', 'like', "%$title%");
         }
         return $query;
     }
